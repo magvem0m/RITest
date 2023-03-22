@@ -1,10 +1,10 @@
 ﻿using RITest.Dto.DrillBlock.Interfaces;
+using RITest.Entities.abstracts;
 
 namespace RITest.Dto.DrillBlock
 {
-    public class DrillBlockUpdate : IDrillBlockUpdate
+    public class DrillBlockUpdate : BaseModel, IDrillBlockUpdate
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

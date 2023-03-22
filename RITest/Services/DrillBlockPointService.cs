@@ -44,7 +44,7 @@ namespace RITest.Services
             return await Task.Run(() =>
             {
                 return _drillBlockPointRepository
-                .Update(new DrillBlockPointEntity { X = dto.X, Y = dto.Y, Z = dto.Z });
+                .Update(dto);
             });
         }
     }

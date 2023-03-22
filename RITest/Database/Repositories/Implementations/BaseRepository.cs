@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RITest.Database;
 using RITest.Database.Repositories.Interfaces;
-using RITest.Entities;
 using RITest.Entities.abstracts;
+using System.Reflection;
 
 namespace RITest.Database.Repositories.Implementations
 {
@@ -39,15 +38,20 @@ namespace RITest.Database.Repositories.Implementations
             return Context.Set<T>().ToList();
         }
 
-        public T Update(T model)
+        public T Update<P>(P model) where P: BaseModel
         {
-            var toUpdate = Context.Set<T>().FirstOrDefault(m => m.Id == model.Id);
-            if (toUpdate != null)
-            {
-                toUpdate = model;
-            }
-            Context.Update(toUpdate);
+            T toUpdate = Context.Set<T>().FirstOrDefault(m => m.Id == model.Id);
+
+            if (toUpdate == null)
+                throw new Exception("Entry instance is Null");
+
+            PropertyInfo[] modelFields = typeof(P).GetProperties();
+            foreach (PropertyInfo prop in modelFields)
+                if(prop.GetValue(model)!=null) typeof(T).GetProperty(prop.Name).SetValue(toUpdate, prop.GetValue(model));
+
+            Context.Set<T>().Update(toUpdate);
             Context.SaveChanges();
+
             return Context.Set<T>().FirstOrDefault(m => m.Id == model.Id);
         }
 

@@ -1,12 +1,12 @@
 ﻿using RITest.Dto.DrillBlockPoint.Interfaces;
+using RITest.Entities.abstracts;
 
 namespace RITest.Dto.DrillBlockPoint
 {
-    public class DrillBlockPointUpdate : IDrillBlockPointUpdate
+    public class DrillBlockPointUpdate : BaseModel, IDrillBlockPointUpdate
     {
-        public int Id { get; set; }
-        public float X { get; set; }
-        public float Y { get; set; }
-        public float Z { get; set; }
+        public float? X { get; set; }
+        public float? Y { get; set; }
+        public float? Z { get; set; }
     }
 }

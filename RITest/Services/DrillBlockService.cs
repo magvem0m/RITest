@@ -37,7 +37,7 @@ namespace RITest.Services
 
         public async Task<DrillBlockEntity> Update(DrillBlockUpdate dto)
         {
-            return await Task.Run(() => _drillBlockRepository.Update(new DrillBlockEntity { Id = dto.Id, Name = dto.Name }));
+            return await Task.Run(() => _drillBlockRepository.Update(dto));
         }
     }
 }

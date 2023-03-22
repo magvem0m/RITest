@@ -38,7 +38,7 @@ namespace RITest.Services
         public async Task<HoleEntity> Update(HoleUpdate dto)
         {
             return await Task.Run(() => _holeRepository
-            .Update(new HoleEntity { Id = dto.Id, Name = dto.Name, DEPTH = dto.DEPTH, DrillBlockId = dto.DrillBlockId }));
+            .Update(dto));
         }
     }
 }
